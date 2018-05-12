@@ -28,29 +28,7 @@
     <script src="js/wow.min.js"></script>
     <script>
         new WOW().init();
-        function loadXMLDoc()
-        {
-        	var xmlhttp;
-        	if (window.XMLHttpRequest)
-        	{
-        		// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-        		xmlhttp=new XMLHttpRequest();
-        	}
-        	else
-        	{
-        		// IE6, IE5 浏览器执行代码
-        		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        	}
-        	xmlhttp.onreadystatechange=function()
-        	{
-        		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        		{
-        			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-        		}
-        	}
-        	xmlhttp.open("post","../RunC",true);
-        	xmlhttp.send();
-        }
+       
     </script>
 </head>
 <body>
@@ -91,18 +69,18 @@
             
             <div class="contact-grids">
                 <div class="col-md-6 contact-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
-                    <!-- <form action="../RunC" method="post" target="nm_iframe"> -->
+                    <form action="../RunJAVA" method="post" target="nm_iframe">
                         <div class="row1">
                             <label>代码：</label>
                             <textarea name="text" placeholder="请输入你的代码"></textarea>
                         </div>
-                        <input type="button" value="提交代码" onlick = "loadXMLDoc">
-                    <!-- </form> -->
+                        <input type="submit" value="提交代码" >
+                    </form>
                 </div>
                 <div class="col-md-6 contact-grid wow fadeInRight animated animated" data-wow-delay="0.4s">
                     <div class="row1">
                         <label>运行结果：</label>
-                        <textarea id="myDiv"></textarea>
+                       <iframe id="id_iframe" name="nm_iframe"></iframe>
                     </div>
                     <div class="clearfix"></div>
                 </div>
