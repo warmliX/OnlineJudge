@@ -28,8 +28,8 @@
     <script src="js/wow.min.js"></script>
     <script>
         new WOW().init();
-       
     </script>
+    <script src="js/submitCode.js"></script>
 </head>
 <body>
 <div class="header head">
@@ -69,13 +69,13 @@
             
             <div class="contact-grids">
                 <div class="col-md-6 contact-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
-                    <form action="../RunJAVA" method="post" target="nm_iframe">
+                    <!-- <form action="../RunJAVA" method="post" target="nm_iframe"> -->
                         <div class="row1">
                             <label>代码：</label>
                             <textarea name="text" placeholder="请输入你的代码"></textarea>
                         </div>
-                        <input type="submit" value="提交代码" >
-                    </form>
+                        <button id="submitCode">提交代码</button>
+                   <!--  </form> -->
                 </div>
                 <div class="col-md-6 contact-grid wow fadeInRight animated animated" data-wow-delay="0.4s">
                     <div class="row1">
