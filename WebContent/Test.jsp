@@ -80,7 +80,7 @@
                 <div class="col-md-6 contact-grid wow fadeInRight animated animated" data-wow-delay="0.4s">
                     <div class="row1">
                         <label>运行结果：</label>
-                       <iframe id="id_iframe" name="nm_iframe"></iframe>
+                       <textarea id="id_iframe"></textarea>
                     </div>
                     <div class="clearfix"></div>
                 </div>

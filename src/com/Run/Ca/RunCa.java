@@ -27,7 +27,7 @@ public class RunCa extends HttpServlet {
   	  return request.getHeader("x-forwarded-for");
   	}
     
-    public static void RunC(String FileName,String text,HttpServletResponse response)
+    public static void RunCa(String FileName,String text,HttpServletResponse response)
     {
     	String url = "E:\\OnlineJudge\\"+FileName+".cpp";
 		File file = new File(url);
@@ -45,7 +45,7 @@ public class RunCa extends HttpServlet {
                 b.append(line+"\n");
             }
             if(b.toString().length() <= 0)
-            	Runexe(FileName);
+            	Runexe(FileName, response);
             else
             	response.getWriter().write(b.toString());
             br.close();
@@ -53,8 +53,8 @@ public class RunCa extends HttpServlet {
 			e.printStackTrace();
 		}
     }
-    
-    public static void Runexe(String FileName,HttpServletResponse response)
+
+	public static void Runexe(String FileName,HttpServletResponse response)
     {
     	Runtime runtime = Runtime.getRuntime();
         String cmd = "cmd /c E:\\OnlineJudge\\"+FileName+">E:\\OnlineJudge\\"+FileName+".txt";
@@ -107,7 +107,7 @@ public class RunCa extends HttpServlet {
 		String IP = getRemortIP(request);
 		String text = request.getParameter("text");
 		String FileName = IP.replace(":", "n");
-		RunC(FileName,text);
+		RunCa(FileName,text,response);
 		StringBuffer stringBuffer = GetEnding(FileName);
 		response.getWriter().write("<a>"+stringBuffer.toString()+"</a>");
 		doGet(request, response);

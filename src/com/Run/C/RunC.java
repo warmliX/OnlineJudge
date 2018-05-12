@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/RunC")
+//@WebServlet("/RunC")
 public class RunC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -109,9 +109,11 @@ public class RunC extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String IP = getRemortIP(request);
 		String text = request.getParameter("text");
+//		System.out.println(text);
 		String FileName = IP.replace(":", "n");
 		RunC(FileName,text,response);
 		StringBuffer stringBuffer = GetEnding(FileName);
 		response.getWriter().write(stringBuffer.toString());
+//		response.getWriter().write(text);
 	}
 }
