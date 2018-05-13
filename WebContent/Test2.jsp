@@ -121,18 +121,33 @@
 </div>
 </body>
 <script type="text/javascript">
+	
+	var preCode = "class Main { \n" + "\n\n\n\n\n" + "}"
     var lis=document.getElementsByTagName('li');
     for(var i=0;i<lis.length;i++)
     {
-        lis[i].onclick=function () {
-            for(var j=0;j<lis.length;j++)
-            {
-                lis[j].className='';
+    	if (i == 2){
+    		lis[i].onclick=function () {
+                for(var j=0;j<lis.length;j++)
+                {
+                    lis[j].className='';
+                }
+                this.className='active';
+               	document.getElementById('result').value='';
+                document.getElementById('code').value=preCode;
             }
-            this.className='active';
-           	document.getElementById('result').value='';
-            document.getElementById('code').value='';
-        }
+    	}else {
+    		lis[i].onclick=function () {
+                for(var j=0;j<lis.length;j++)
+                {
+                    lis[j].className='';
+                }
+                this.className='active';
+               	document.getElementById('result').value='';
+                document.getElementById('code').value='';
+            }
+    	}
+        
     }
 </script>
 </html>
