@@ -130,7 +130,7 @@
                 lis[j].className='';
             }
             this.className='active';
-            document.getElementById('result').value='';
+           	document.getElementById('result').value='';
             document.getElementById('code').value='';
         }
     }
