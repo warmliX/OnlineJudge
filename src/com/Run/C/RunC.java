@@ -68,6 +68,7 @@ public class RunC extends HttpServlet {
                 Runexe(FileName, response);
             } else {
                 response.getWriter().write(b.toString());
+                return;
             }
 
             br.close();
@@ -93,6 +94,7 @@ public class RunC extends HttpServlet {
 
             if (b.toString().length() > 0) {
                 response.getWriter().write(b.toString());
+                return;
             }
 
             br.close();
@@ -117,7 +119,7 @@ public class RunC extends HttpServlet {
 
         try {
             while ((str = bReader.readLine()) != null) {
-                stringBuffer.append(str + "/n");
+                stringBuffer.append(str + "\n");
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -142,11 +144,18 @@ public class RunC extends HttpServlet {
     protected void doPost(HttpServletRequest request,
         HttpServletResponse response) throws ServletException, IOException {
         String IP = getRemortIP(request);
-        System.out.println("adsasdasd");
 
+        response.setHeader("Content-type", "text/html;charset=UTF-8"); 
+        response.setCharacterEncoding("utf-8");
+        
         String text = request.getParameter("text");
-        System.out.println(text);
-
+        String Word = SafeC.Safe(text);
+        if(!Word.equals("yes"))
+        {
+        	response.getWriter().write("½ûÖ¹"+Word+"¹Ø¼ü×Ö");
+        	return;
+        }
+        
         String FileName = IP.replace(":", "n");
         RunC(FileName, text, response);
 

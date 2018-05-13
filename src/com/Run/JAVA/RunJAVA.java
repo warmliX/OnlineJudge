@@ -56,29 +56,15 @@ public class RunJAVA extends HttpServlet {
                 b.append(line+"\n");
             }
             if(b.toString().length() > 0)
+            {
             	response.getWriter().write(b.toString());
+            	return;
+            }
             br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
-    
-   /* public static void Runexe(String FileName)
-    {
-    	Runtime runtime = Runtime.getRuntime();
-        String cmd = "cmd /c E: && cd E:\\OnlineJudge && java "+FileName+">"+FileName+".txt";
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(runtime.exec(cmd).getInputStream()));
-            String line=null;
-            StringBuffer b=new StringBuffer();
-            while ((line=br.readLine())!=null) {
-                b.append(line+"\n");
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
     
     StringBuffer GetEnding(String FileName,String IP)
     {
@@ -96,7 +82,7 @@ public class RunJAVA extends HttpServlet {
     	try {
 			while((str = bReader.readLine()) != null)
 			{
-				stringBuffer.append(str);
+				stringBuffer.append(str+"\n");
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -111,11 +97,21 @@ public class RunJAVA extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String IP = getRemortIP(request).replace(":", "n");
+		
+		response.setHeader("Content-type", "text/html;charset=UTF-8"); 
+        response.setCharacterEncoding("utf-8");
+		
 		String text = request.getParameter("text");
+		String Word = SafeJava.Safe(text);
+		if(!Word.equals("yes"));
+		{
+			response.getWriter().write("½ûÖ¹"+Word+"¹Ø¼ü×Ö");
+		}
+		
 		String FileName = text.substring(text.indexOf("class")+6,text.indexOf('{')-1);
 		RunJAVA(IP,FileName,text,response);
 		StringBuffer stringBuffer = GetEnding(FileName,IP);
-		response.getWriter().write("<a>"+stringBuffer.toString()+"</a>");
+		response.getWriter().write(stringBuffer.toString());
 	}
 }
 

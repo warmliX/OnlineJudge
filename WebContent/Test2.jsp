@@ -97,21 +97,13 @@
                     <div class="clearfix"></div>
                 </div>
                 <div id="div1" style="float: right">
-                    <button class="btn btn-success" style="margin-right: 1ex">搜索错误信息</button>
+                    <button class="btn btn-success" style="margin-right: 1ex" onclick="question()">搜索错误信息</button>
                     <button class="btn btn-success">分享到QQ</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 <div class="footer-section wow fadeInDownBig animated animated" data-wow-delay="0.4s">
     <div class="container">
         <div class="copy">
@@ -121,6 +113,16 @@
 </div>
 </body>
 <script type="text/javascript">
+function question() {
+	var q = document.getElementById('result').value;
+	var baidu = "https://www.baidu.com/baidu?tn=monline_3_dg&ie=utf-8&wd=";
+	var arr = new Array();
+	arr.push(baidu);
+	arr.push(q);
+	var url = arr.join("");
+	window.location.href = url;
+}
+	
 	
 	var preCode = "class Main { \n" + "\n\n\n\n\n" + "}"
     var lis=document.getElementsByTagName('li');

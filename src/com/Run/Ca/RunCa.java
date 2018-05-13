@@ -64,6 +64,7 @@ public class RunCa extends HttpServlet {
                 Runexe(FileName, response);
             } else {
                 response.getWriter().write(b.toString());
+                return;
             }
 
             br.close();
@@ -89,6 +90,7 @@ public class RunCa extends HttpServlet {
 
             if (b.toString().length() > 0) {
                 response.getWriter().write(b.toString());
+                return;
             }
 
             br.close();
@@ -114,7 +116,7 @@ public class RunCa extends HttpServlet {
 
         try {
             while ((str = bReader.readLine()) != null) {
-                stringBuffer.append(str);
+                stringBuffer.append(str+"\n");
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -131,12 +133,23 @@ public class RunCa extends HttpServlet {
     protected void doPost(HttpServletRequest request,
         HttpServletResponse response) throws ServletException, IOException {
         String IP = getRemortIP(request);
+        
+        response.setHeader("Content-type", "text/html;charset=UTF-8"); 
+        response.setCharacterEncoding("utf-8");
+        
         String text = request.getParameter("text");
+        String Word = SafeCa.Safe(text);
+        if(!Word.equals("yes"))
+        {
+        	response.getWriter().write("½ûÖ¹"+Word+"¹Ø¼ü×Ö");
+        	return;
+        }
+        
         String FileName = IP.replace(":", "n");
         RunCa(FileName, text, response);
 
         StringBuffer stringBuffer = GetEnding(FileName);
-        response.getWriter().write("<a>" + stringBuffer.toString() + "</a>");
+        response.getWriter().write(stringBuffer.toString());
         doGet(request, response);
     }
 }
