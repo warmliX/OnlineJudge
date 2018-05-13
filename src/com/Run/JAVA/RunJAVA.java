@@ -32,13 +32,19 @@ public class RunJAVA extends HttpServlet {
   	  return request.getHeader("x-forwarded-for");
   	}
     
-    public static void RunC(String FileName,String text)
+    public static void RunJAVA(String IP,String FileName,String text,HttpServletResponse response)
     {
-    	String url = "E:\\OnlineJudge\\"+FileName+".java";
+    	String path = "E:\\OnlineJudge\\"+IP ;
+        File dirpath = new File(path);
+
+        if (!dirpath.exists()) {
+            dirpath.mkdir();
+        }
+    	String url = "E:\\OnlineJudge\\"+IP+"\\"+FileName+".java";
 		File file = new File(url);
 		BufferedWriter bWriter;
 		Runtime runtime = Runtime.getRuntime();
-        String cmd = "cmd /c E: && cd E:\\OnlineJudge && javac "+FileName+".java && java "+FileName+">"+FileName+".txt";
+        String cmd = "cmd /c E: && cd OnlineJudge "+"\\"+IP+"&& javac "+FileName+".java && java "+FileName+">"+IP+".txt";
 		try {
 			bWriter = new BufferedWriter(new FileWriter(file));
 			bWriter.write(text);
@@ -49,17 +55,15 @@ public class RunJAVA extends HttpServlet {
             while ((line=br.readLine())!=null) {
                 b.append(line+"\n");
             }
-            if(b.toString().length() <= 0)
-            	Runexe(FileName);
-            else
-            	System.out.println(b.toString());
+            if(b.toString().length() > 0)
+            	response.getWriter().write(b.toString());
             br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
     
-    public static void Runexe(String FileName)
+   /* public static void Runexe(String FileName)
     {
     	Runtime runtime = Runtime.getRuntime();
         String cmd = "cmd /c E: && cd E:\\OnlineJudge && java "+FileName+">"+FileName+".txt";
@@ -74,11 +78,11 @@ public class RunJAVA extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
-    StringBuffer GetEnding(String FileName)
+    StringBuffer GetEnding(String FileName,String IP)
     {
-    	String url = "E:\\OnlineJudge\\"+FileName+".txt";
+    	String url = "E:\\OnlineJudge\\"+IP+"\\"+IP+".txt";
 		File file = new File(url);
     	BufferedReader bReader = null;
 		try {
@@ -102,18 +106,16 @@ public class RunJAVA extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String IP = getRemortIP(request);
+		String IP = getRemortIP(request).replace(":", "n");
 		String text = request.getParameter("text");
-		String FileName = IP.replace(":", "n");
-		RunC(FileName,text);
-		StringBuffer stringBuffer = GetEnding(FileName);
+		String FileName = text.substring(text.indexOf("class")+6,text.indexOf('{')-1);
+		RunJAVA(IP,FileName,text,response);
+		StringBuffer stringBuffer = GetEnding(FileName,IP);
 		response.getWriter().write("<a>"+stringBuffer.toString()+"</a>");
-		doGet(request, response);
 	}
 }
 
