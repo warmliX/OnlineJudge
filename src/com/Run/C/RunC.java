@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet("/RunC")
+@WebServlet("/RunC")
 public class RunC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

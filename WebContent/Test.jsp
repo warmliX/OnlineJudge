@@ -3,8 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>练习</title>
+    <title>练习</title>
     <!---css--->
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -30,6 +29,11 @@
         new WOW().init();
     </script>
     <script src="js/submitCode.js"></script>
+    <!--//end-animate-->
+    <style>
+        #div1{margin: 0;
+            padding: 0;}
+    </style>
 </head>
 <body>
 <div class="header head">
@@ -39,16 +43,6 @@
                 <h1><a href="index.html">Online Judge</a></h1>
             </div>
             <div class="nav-icon">
-                <a href="#" class="navicon"></a>
-                <div class="toggle">
-                    <ul class="toggle-menu">
-                        <li><a href="index.html">主页</a></li>
-                        <li><a href="c.html">C语言</a></li>
-                        <li><a  href="c++.html">c++</a></li>
-                        <li><a  href="java.html">java</a></li>
-                        <li><a  href="cont.html" class="active">代码测试</a></li>
-                    </ul>
-                </div>
                 <script>
                     $('.navicon').on('click', function (e) {
                         e.preventDefault();
@@ -64,31 +58,60 @@
 <!--header--->
 <div class="content">
     <div class="contact">
-        <div class="container">
-            <h2>测试</h2>
-            
-            <div class="contact-grids">
-                <div class="col-md-6 contact-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
-                    <!-- <form action="../RunJAVA" method="post" target="nm_iframe"> -->
+        <div class="container" id="con">
+
+            <h2>代码测试</h2>
+            <div class="packt">
+                <ul class="nav nav-tabs">
+                    <li class="active" id="c">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-pencil"></span> C语言
+                        </a>
+                    </li>
+                    <li id="c++">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-book"></span> C++
+                        </a>
+                    </li>
+                    <li id="java">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-edit"></span> Java
+                        </a>
+                    </li>
+                </ul>
+                <div class="contact-grids" id="div2">
+                    <div class="col-md-6 contact-grid wow fadeInLeft animated animated" data-wow-delay="0.4s">
+                            <div class="row1">
+                                <label>代码：</label>
+                                <textarea placeholder="请输入你的代码" id="code"></textarea>
+                            </div>
+                            <button class="btn btn-success" id="subCode">确定</button>
+                    </div>
+                    <div class="col-md-6 contact-grid  wow fadeInRight animated animated" data-wow-delay="0.4s">
                         <div class="row1">
-                            <label>代码：</label>
-                            <textarea name="text" placeholder="请输入你的代码"></textarea>
+                            <label>运行结果：</label>
+                            <textarea id="result" disabled="true"></textarea>
                         </div>
-                        <button id="submitCode">提交代码</button>
-                   <!--  </form> -->
-                </div>
-                <div class="col-md-6 contact-grid wow fadeInRight animated animated" data-wow-delay="0.4s">
-                    <div class="row1">
-                        <label>运行结果：</label>
-                       <textarea id="id_iframe"></textarea>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
+                <div id="div1" style="float: right">
+                    <button class="btn btn-success" style="margin-right: 1ex">搜索错误信息</button>
+                    <button class="btn btn-success">分享到QQ</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
 <div class="footer-section wow fadeInDownBig animated animated" data-wow-delay="0.4s">
     <div class="container">
         <div class="copy">
@@ -97,4 +120,19 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    var lis=document.getElementsByTagName('li');
+    for(var i=0;i<lis.length;i++)
+    {
+        lis[i].onclick=function () {
+            for(var j=0;j<lis.length;j++)
+            {
+                lis[j].className='';
+            }
+            this.className='active';
+            document.getElementById('result').value='';
+            document.getElementById('code').value='';
+        }
+    }
+</script>
 </html>
