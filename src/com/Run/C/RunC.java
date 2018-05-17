@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/RunC")
 public class RunC extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    private static final String FileDir = "C:\\OnlineJudge\\";
     public RunC() {
         super();
     }
@@ -35,19 +35,19 @@ public class RunC extends HttpServlet {
 
     public static void RunC(String FileName, String text,
         HttpServletResponse response) {
-        String path = "E:\\OnlineJudge\\" + FileName;
+        String path = FileDir + FileName;
         File dirpath = new File(path);
 
         if (!dirpath.exists()) {
             dirpath.mkdir();
         }
 
-        String url = "E:\\OnlineJudge\\" + FileName + "\\" + FileName + ".c";
+        String url = FileDir + FileName + "\\" + FileName + ".c";
         File file = new File(url);
         BufferedWriter bWriter;
         Runtime runtime = Runtime.getRuntime();
-        String cmd = "cmd /c gcc -o E:\\OnlineJudge\\" + FileName + "\\" +
-            FileName + ".exe E:\\OnlineJudge\\" + FileName + "\\" + FileName +
+        String cmd = "cmd /c gcc -o "+ FileDir + FileName + "\\" +
+            FileName + ".exe "+FileDir + FileName + "\\" + FileName +
             ".c ";
 
         try {
@@ -79,8 +79,8 @@ public class RunC extends HttpServlet {
 
     public static void Runexe(String FileName, HttpServletResponse response) {
         Runtime runtime = Runtime.getRuntime();
-        String cmd = "cmd /c E:\\OnlineJudge\\" + FileName +"\\"+FileName+
-            ">E:\\OnlineJudge\\" + FileName +"\\"+FileName+ ".txt";
+        String cmd = "cmd /c "+ FileDir + FileName +"\\"+FileName+
+            ">"+ FileDir + FileName +"\\"+FileName+ ".txt";
 
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -104,7 +104,7 @@ public class RunC extends HttpServlet {
     }
 
     StringBuffer GetEnding(String FileName) {
-        String url = "E:\\OnlineJudge\\" + FileName +"\\"+FileName+ ".txt";
+        String url = FileDir + FileName +"\\"+FileName+ ".txt";
         File file = new File(url);
         BufferedReader bReader = null;
 

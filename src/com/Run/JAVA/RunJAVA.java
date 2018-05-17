@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/RunJAVA")
 public class RunJAVA extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static final String FileDir = "C:\\OnlineJudge\\";
     public RunJAVA() {
         super();
         
@@ -34,17 +34,17 @@ public class RunJAVA extends HttpServlet {
     
     public static void RunJAVA(String IP,String FileName,String text,HttpServletResponse response)
     {
-    	String path = "E:\\OnlineJudge\\"+IP ;
+    	String path = FileDir + IP ;
         File dirpath = new File(path);
 
         if (!dirpath.exists()) {
             dirpath.mkdir();
         }
-    	String url = "E:\\OnlineJudge\\"+IP+"\\"+FileName+".java";
+    	String url = FileDir + IP + "\\"+FileName + ".java";
 		File file = new File(url);
 		BufferedWriter bWriter;
 		Runtime runtime = Runtime.getRuntime();
-        String cmd = "cmd /c E: && cd OnlineJudge "+"\\"+IP+"&& javac "+FileName+".java && java "+FileName+">"+IP+".txt";
+        String cmd = "cmd /c cd/ && cd OnlineJudge "+"\\"+IP+"&& javac "+FileName+".java && java "+FileName+">"+IP+".txt";
 		try {
 			bWriter = new BufferedWriter(new FileWriter(file));
 			bWriter.write(text);
@@ -68,7 +68,7 @@ public class RunJAVA extends HttpServlet {
     
     StringBuffer GetEnding(String FileName,String IP)
     {
-    	String url = "E:\\OnlineJudge\\"+IP+"\\"+IP+".txt";
+    	String url = FileDir+IP+"\\"+IP+".txt";
 		File file = new File(url);
     	BufferedReader bReader = null;
 		try {
@@ -103,9 +103,10 @@ public class RunJAVA extends HttpServlet {
 		
 		String text = request.getParameter("text");
 		String Word = SafeJava.Safe(text);
-		if(!Word.equals("yes"));
+		if(!Word.equals("yes"))
 		{
 			response.getWriter().write("½ûÖ¹"+Word+"¹Ø¼ü×Ö");
+			return;
 		}
 		
 		String FileName = text.substring(text.indexOf("class")+6,text.indexOf('{')-1);

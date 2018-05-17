@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/RunCa")
 public class RunCa extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    private static final String FileDir = "C:\\OnlineJudge\\";
     public String getRemortIP(HttpServletRequest request) {
         if (request.getHeader("x-forwarded-for") == null) {
             return request.getRemoteAddr();
@@ -31,19 +31,19 @@ public class RunCa extends HttpServlet {
 
     public static void RunCa(String FileName, String text,
         HttpServletResponse response) {
-        String path = "E:\\OnlineJudge\\" + FileName;
+        String path = FileDir + FileName;
         File dirpath = new File(path);
 
         if (!dirpath.exists()) {
             dirpath.mkdir();
         }
 
-        String url = "E:\\OnlineJudge\\" + FileName + "\\" + FileName + ".cpp";
+        String url = FileDir + FileName + "\\" + FileName + ".cpp";
         File file = new File(url);
         BufferedWriter bWriter;
         Runtime runtime = Runtime.getRuntime();
-        String cmd = "cmd /c g++ E:\\OnlineJudge\\" + FileName + "\\" +
-            FileName + ".cpp -o E:\\OnlineJudge\\" + FileName + "\\" +
+        String cmd = "cmd /c g++ "+ FileDir + FileName + "\\" +
+            FileName + ".cpp -o "+ FileDir + FileName + "\\" +
             FileName;
 
         try {
@@ -75,8 +75,8 @@ public class RunCa extends HttpServlet {
 
     public static void Runexe(String FileName, HttpServletResponse response) {
         Runtime runtime = Runtime.getRuntime();
-        String cmd = "cmd /c E:\\OnlineJudge\\" + FileName + "\\" + FileName +
-            ">E:\\OnlineJudge\\" + FileName + "\\" + FileName + ".txt";
+        String cmd = "cmd /c "+ FileDir + FileName + "\\" + FileName +
+            ">"+ FileDir + FileName + "\\" + FileName + ".txt";
 
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -100,7 +100,7 @@ public class RunCa extends HttpServlet {
     }
 
     StringBuffer GetEnding(String FileName) {
-        String url = "E:\\OnlineJudge\\" + FileName + "\\" + FileName + ".txt";
+        String url = FileDir + FileName + "\\" + FileName + ".txt";
         File file = new File(url);
         BufferedReader bReader = null;
 

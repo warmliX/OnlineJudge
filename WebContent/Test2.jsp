@@ -98,7 +98,7 @@
                 </div>
                 <div id="div1" style="float: right">
                     <button class="btn btn-success" style="margin-right: 1ex" onclick="question()">搜索错误信息</button>
-                    <button class="btn btn-success">分享到QQ</button>
+                    <!-- <button class="btn btn-success">分享到QQ</button> -->
                 </div>
             </div>
         </div>
